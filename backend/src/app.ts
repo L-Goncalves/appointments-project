@@ -1,8 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import patientRoutes from './routes/patientRoutes';
+import routes from './routes';
 import mongoConnection from './services/mongo';
-
 
 dotenv.config();
 
@@ -16,7 +15,7 @@ async function startServer() {
     await mongoConnection.connect(MONGO_URI);
 
     app.use(express.json());
-    app.use('/api/patients', patientRoutes);
+    app.use('/api', routes);
     app.listen(PORT, () => {
 
       console.log(`Servidor rodando na porta ${PORT}`);
